@@ -132,7 +132,6 @@ CLOUDINARY = {
     'CLOUD_NAME': 'meme-topia',
     'API_KEY': '472165778211368',
     'API_SECRET': 'Yl0h25Zzw6Ct3j7V6ZsSRL0fz5s',
-    'API_PROXY': 'http://proxy.server:3128'
 }
 
 CLOUDINARY_URL = 'cloudinary://472165778211368:Yl0h25Zzw6Ct3j7V6ZsSRL0fz5s@meme-topia'
@@ -141,7 +140,6 @@ cloudinary.config(
     cloud_name="meme-topia",
     api_key="472165778211368",
     api_secret="Yl0h25Zzw6Ct3j7V6ZsSRL0fz5s",
-    api_proxy="http://proxy.server:3128",
     secure=True,
 )
 

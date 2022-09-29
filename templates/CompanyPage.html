@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DNF: Excellency in every Innovation</title>
+    <title>{{ comp.Name }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,6 +13,10 @@
         background-color: rgb(31, 31, 31);
         font-family: "Century Gothic", sans-serif;
         color: white;
+    }
+    .Title {
+        font-size: 40px;
+        margin-left: 15px;
     }
     .Home_Tile {
         background-color: rgb(31, 31, 31);
@@ -31,48 +35,25 @@
         margin: 5px;
         width: 105%;
     }
-    .Title {
-        margin-left: 15px;
-    }
-    .Product_Title > h5 {
-        font-size: 35px;
-    }
-    .CPImg {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
+    .Dscrp {
+        font-size: 30px;
+        padding: 10px;
     }
 </style>
 {% include "Nav.html" %}
     <div class="container">
+        <div class="Title">{{ comp.Name }}</div>
         <div class="Home_Tile">
-            {% for sale in sales %}
-                <img src="{{ sale.Sale_Img.url }}"
-                 class="H_Tile_Img" alt="Home_Tile_Img">
-            {% endfor %}
+            <img src="{{ comp.Logo.url }}" class="H_Tile_Img" alt="Home_Tile_Img">
         </div>
-        <br>
-        <div class="Title">
-            <h5>Partnered Companies:</h5>
-        </div>
+        <div class="Title">About Us:</div>
+        <div class="Dscrp">{{ comp.Dscrp }}</div><br>
+        <div class="Title">Products:</div>
         <div class="row">
-            {% for Comp in comps %}
-                <div class="Comp_Panel col s3">
-                    <a href="/Company/{{ Comp.id }}">
-                        <img class="CPImg" alt="{{ Comp.Name }}" src="{{ Comp.Logo.url }}">
-                    </a>
-                </div>
-            {% endfor %}
-            
-        </div>
-        <div class="Title">
-            <h5>Our Top Products:</h5>
-        </div>
-        <div class="row">
-            {% for Product in products %}
+            {% for Product in prods %}
                 <div class="PdCCover col s4">
                     <div class="PdCard card">
-                        <a href="./Product/{{ Product.id }}">
+                        <a href="/Product/{{ Product.id }}">
                             <div class="card-image waves-effect waves-block waves-light" >
                                 <img alt="{{ Product.Name }}" class="" src="{{ Product.prodimg_set.first.Img.url }}">
                             </div>
@@ -93,13 +74,4 @@
         </div>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous">
-</script>
-<script type="text/javascript">
-    function LoadImg(Element) {
-
-    }
-</script>
 </html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ prod.Name }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<style>
+    body {
+        background-color: #1c1b1b;
+        color: white;
+        font-family: "Century Gothic", sans-serif;
+    }
+    .ImgShow {
+        height: 300px;
+        width: 300px;
+    }
+    .ImgShow > img {
+        height: 100%;
+        width: 100%;
+        border-radius: 5%;
+    }
+    .ImgBoxMini {
+        border: white inset 2px;
+        margin: 10px;
+        width: 100px;
+        height: 50px;
+        border-radius: 10%;
+    }
+    .IBMImg {
+        max-height: 80%;
+        max-width: 100%;
+        margin-top: 5px;
+        align-self: center;
+    }
+    .PdName {
+        font-size: 35px;
+        color: #e5e3e3;
+    }
+    .PdPrice {
+        font-size: 30px;
+        color: #5959d9;
+    }
+    .PdDscrp {
+        font-size: 20px;
+    }
+    .Active_Box {
+        border-color: darkgoldenrod;
+    }
+</style>
+    {% include "Nav.html" %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col s6">
+                <div class="ImgShow">
+                    <img id="ISImg" alt="ShowImg" src="{{ prod.prodimg_set.first.Img.url }}">
+                </div>
+                {% for prodimg in prod.prodimg_set.values %}
+                    <div id="IBM_{{ prodimg.Sno }}" class="ImgBoxMini col s2
+                            {% if prodimg.Sno == 1 %} Active_Box{% endif %}"
+                         onclick="LoadImg('{{ prodimg.Img.url }}', '{{ prodimg.Sno }}');">
+                        <img class="IBMImg" alt="{{ prodimg.Prod.Name }}" src="{{ prodimg.Img.url }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col s6">
+                <div class="PdName">{{ prod.Name }}</div>
+                <div class="divider"></div>
+                <div class="PdPrice">${{ prod.Price }}</div><br>
+                <u style="font-size: 15px;">Description: </u><br>
+                <div class="PdDscrp">{{ prod.Dscrp }}</div>
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+    function LoadImg(Src, Sno) {
+        const ImgShow = document.getElementById('ISImg')
+        const Box = document.getElementById(`IBM_${Sno}`)
+        const OldBox = document.querySelector('.Active_Box')
+        OldBox.classList.remove('Active_Box')
+        Box.classList.add('Active_Box')
+        ImgShow.src = Src
+    }
+</script>
+</body>
+</html>
