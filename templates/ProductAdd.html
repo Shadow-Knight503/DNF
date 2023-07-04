@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Add products</title>
+</head>
+<body>
+    <style>
+        body {
+            background-color: rgb(31, 31, 31);
+            font-family: "Century Gothic", sans-serif;
+            color: white;
+        }
+        .Body {
+            background-color: #262626;
+            padding: 25px;
+            box-shadow: 0 0 10px #5e5d5d;
+            border-radius: 5px;
+        }
+        .dropdown-content li > a, .dropdown-content li > span {
+            background-color: rgb(31, 31, 31);
+            color: #fb8c00;
+        }
+        .select-dropdown {
+            color: #fb8c00;
+        }
+    </style>
+    <div class="container">
+        <h3>Insert</h3>
+        <div class="Body">
+            <form method="post" action="" class="row" onsubmit="" enctype="multipart/form-data">
+                {{ PdImgForm.management_data }}
+                {% csrf_token %}
+                <div class="input-field col s12" style="color: white">
+                    {{ ProdForm.Comp }}
+                    <label for="id_Comp" style="">Product Company</label>
+                </div>
+                <div class="input-field col s12">
+                    {{ ProdForm.Name }}
+                    <label for="id_Name" style="">Name</label>
+                </div>
+                <div class="input-field col s12">
+                    {{ ProdForm.Price }}
+                    <label for="id_Price" style="">Price</label>
+                </div>
+                <div class="input-field col s12">
+                    {{ ProdForm.Stock }}
+                    <label for="id_Stock" style="">Stock</label>
+                </div>
+                <div class="input-field col s12">
+                    {{ ProdForm.Dscrp }}
+                    <label for="id_Dscrp" style="">Description</label>
+                </div>
+                {{ PdImgForm.as_p }}
+{#                <input class="ImgFrm" type="file" alt="Image From" required onchange="Verify(this)">#}
+                <button class="btn indigo accent-4 waves-effect waves-light" type="submit" name="action"
+                        style="float: right">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+{#<script src="https://code.jquery.com/jquery-3.5.1.js"#}
+{#        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="#}
+{#        crossorigin="anonymous">#}
+{#</script>#}
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        const instance = M.FormSelect.init(document.querySelector('select'))
+    });
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start !== -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end === -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+
+    function Verify(El) {
+        alert(El.value)
+    }
+
+    function Product_Form() {
+        let Images = []
+        $.ajaxSetup({
+            headers: {"X-CSRFToken": getCookie("csrftoken")}
+        });
+        $.ajax({
+            type: 'POST',
+            url: {% url 'Product Add Page' %},
+            dataType: 'json',
+            async: true,
+            data: JSON.stringify({
+                'Act': 'ProdImg',
+                'Images': '',
+            }),
+            success: function () {
+
+            }
+        });
+    }
+</script>
+</html>

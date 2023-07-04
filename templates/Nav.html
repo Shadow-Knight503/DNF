@@ -1,11 +1,27 @@
 <div class="navbar-fixed">
-    <nav class="transparent">
-        <div class="nav-wrapper transparent">
-            <a href="/"><img src="https://res.cloudinary.com/meme-topia/image/upload/v1664005665/DNF/125939973_2825676681080534_1387655944526823370_n_b9fcfr.jpg"
-            alt="Logo" class="Logo"></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <nav class="">
+        <div class="nav-wrapper row">
+            <a class="CompLogo col s1" href="/">
+                <svg viewBox="0 30 120 90" xmlns="http://www.w3.org/2000/svg"  width="85px" height="85px">
+                    <path d="M 13.5,30 v 10 h -9  v -10  h 9.5 M 2,22.5 v 7.5 h -7.5 v -7.5 h 8
+                            M 4,24.5 v 3 h 3 v -3 h -3.5"
+                          stroke="lightblue" fill="lightblue" stroke-width="1"></path>
+                    <path d="M 15.5,39 h 10 a 2.1,2.5 0 0 1 0,40 h -14 v -32 h 3 v 28 h 12
+                            a 2.1,2.5 0 0 0 0,-30.5 h -15 v -2.5 h 4 v -3.5
+                            M 46,39 h 7.5 l 22,35 v -35 h 3 v 40 h -4 l -22,-35 h -6 v -5
+                            M 46.5,46.5 h 3 v 32 h -3 v -32.5
+                            M 82.5,39 h 30 v 4 h -30 v -4.5
+                            M 82.5,45.5 h 3 v 8 h 26 v 3 h -26 v 22.5 h -3 v -34"
+                          stroke="white" fill="white" stroke-width="1"></path>
+                </svg>
+            </a>
+            <div id="search_bar" class="SearchBar offset-s2 col s5" style="width: 55%">
+                <input class="SrchInp col s10 browser-default validate" id="searchbar" type="text" placeholder="Search">
+                <label for="searchbar" class="SBLabel"></label>
+            </div>
+            <ul id="nav-mobile" class="NCons right hide-on-med-and-down">
+                <li><a id="SrchBtn" onclick="LoadSrhBar()"><i class="material-icons">search</i></a></li>
                 <li><a href="">Contacts</a></li>
-                <li><a href="">Store</a></li>
                 <li><a href="">About</a></li>
             </ul>
         </div>
@@ -13,10 +29,25 @@
 </div>
 <style>
     .nav-wrapper {
+        background-color: #1f1f1f;
         border-bottom: 2px black solid;
     }
-    .transparent {
-        background-color: rgba(0, 0, 0, 0);
+    .input-field input[type=text]:focus + label {
+        color: #0941e0 !important;
+    }
+    .input-field .prefix {
+        color: #0941e0 !important;
+        margin-bottom: 15px;
+    }
+    .input-field input[type=text]:focus {
+        border-bottom: 1px solid #0940df !important;
+        box-shadow: 0 1px 0 0 #0940df !important;
+    }
+    .CompLogo {
+
+    }
+    .CompLogo svg {
+        margin-bottom: 50px;
     }
     .Logo {
         border-radius: 50px;
@@ -25,4 +56,82 @@
         margin-top: 6px;
         margin-left: 10px;
     }
+    .SearchBar {
+        width: 100%;
+        display: none;
+        margin-top: 10px;
+        position: relative;
+    }
+    .SrchInp {
+        width: 100%;
+        height: 40px;
+        background-color: #4b4949;
+        border: grey 2px solid;
+        color: white;
+        border-radius: 5px;
+
+    }
+    .SrchIco {
+        left: 20px;
+    }
+    .SrchIco, .KillSrch {
+        font-size: 30px;
+        margin-top: 7px;
+    }
+    .NCons {
+
+    }
+    .SearchBar_Ani {
+
+
+    }
+    .SearchBar_Dani {
+        animation: KillSrchBar 0.7s forwards ease-in;
+    }
+
+    @keyframes NCons {
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    @keyframes SrchBar {
+        0% {
+            display: none;
+            transform: scaleX(0);
+        } 100% {
+            display: block;
+            transform: scaleX(1);
+        }
+    }
 </style>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+    function LoadSrhBar() {
+        const SrchBar = document.getElementById("search_bar")
+        const SrchBtn = document.getElementById("SrchBtn")
+        const SrchBtnIco = document.querySelector("#SrchBtn i")
+        SrchBar.style.display = "block"
+        SrchBar.style.animation = "SrchBar 0.7s normal ease-in-out"
+        SrchBtnIco.innerText = "close"
+        SrchBtn.setAttribute('onclick', 'KillSrchBar()')
+    }
+
+    function KillSrchBar () {
+        const SrchBar = document.getElementById("search_bar")
+        const SrchBtn = document.getElementById("SrchBtn")
+        const SrchBtnIco = document.querySelector("#SrchBtn i")
+        SrchBar.style.animation = "none"
+        setTimeout(() => {
+            SrchBar.style.animation = "SrchBar 0.7s reverse ease-in-out"
+        }, 10)
+        setTimeout(() => {
+            SrchBar.style.display = "none"
+        }, 700)
+        SrchBtnIco.innerText = "search"
+        SrchBtn.setAttribute('onclick', 'LoadSrhBar()')
+    }
+</script>

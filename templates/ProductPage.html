@@ -22,18 +22,20 @@
         height: 100%;
         width: 100%;
         border-radius: 5%;
+        animation: ShowImg 0.5s ease-in;
     }
     .ImgBoxMini {
         border: white inset 2px;
         margin: 10px;
-        width: 100px;
-        height: 50px;
+        width: 50px;
+        height: 75px;
         border-radius: 10%;
+        text-align: center;
     }
     .IBMImg {
-        max-height: 80%;
+        max-height: 100%;
         max-width: 100%;
-        margin-top: 5px;
+        margin-top: 10%;
         align-self: center;
     }
     .PdName {
@@ -44,11 +46,21 @@
         font-size: 30px;
         color: #5959d9;
     }
+    .PdStock {
+        font-size: 20px;
+    }
     .PdDscrp {
         font-size: 20px;
     }
     .Active_Box {
-        border-color: darkgoldenrod;
+        border-color: navy;
+    }
+    @keyframes ShowImg {
+        0% {
+            opacity: 0.5;
+        } 100% {
+            opacity: 1;
+        }
     }
 </style>
     {% include "Nav.html" %}
@@ -71,6 +83,7 @@
                 <div class="PdName">{{ prod.Name }}</div>
                 <div class="divider"></div>
                 <div class="PdPrice">${{ prod.Price }}</div><br>
+                <div class="PdStock">Stock: {{ prod.Stock }}</div><br>
                 <u style="font-size: 15px;">Description: </u><br>
                 <div class="PdDscrp">{{ prod.Dscrp }}</div>
             </div>
@@ -87,6 +100,7 @@
         const OldBox = document.querySelector('.Active_Box')
         OldBox.classList.remove('Active_Box')
         Box.classList.add('Active_Box')
+        ImgShow.style.animation = "none"
         ImgShow.src = Src
     }
 </script>

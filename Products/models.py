@@ -43,6 +43,7 @@ class Product(models.Model):
     Comp = models.ForeignKey(Company, on_delete=models.CASCADE, default=1)
     Name = models.CharField(max_length=200)
     Price = models.CharField(max_length=10)
+    Stock = models.IntegerField(default=10)
     Dscrp = models.TextField(max_length=500)
 
     def __str__(self):
@@ -51,7 +52,7 @@ class Product(models.Model):
 
 class ProdImg(models.Model):
     Prod = models.ForeignKey(Product, on_delete=models.CASCADE, default=1)
-    Img = CloudinaryField('Product')
+    Img = CloudinaryField('Product Img')
     Sno = models.IntegerField(default=1)
 
     def __str__(self):

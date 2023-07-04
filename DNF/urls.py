@@ -20,6 +20,8 @@ import Products.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Products.views.home, name="Home Page"),
+    path('AddProducts/', Products.views.add_product, name="Product Add Page"),
+    path('Test/', Products.views.test, name="Testing... "),
     path('Product/<int:prod_id>', Products.views.product, name="Product Page"),
     path('Company/<int:comp_id>', Products.views.company, name="Company Page"),
 ]
